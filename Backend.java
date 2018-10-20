@@ -7,7 +7,6 @@ public class Backend{
 
     public Backend() {
         super();
-        
         new CellMatrix();
         this.rootFrame = new SolverFrame();
         this.rootFrame.setDefaultCloseOperation(SolverFrame.EXIT_ON_CLOSE);

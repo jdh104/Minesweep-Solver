@@ -31,11 +31,10 @@ public class MainClass {
         } catch (Exception e) {
             System.err.println("Failed to get native Look-and-Feel");
         }
-
-        backend = new Backend();
-
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                backend = new Backend();
                 backend.getRootFrame().setVisible(true);
             }
         });
