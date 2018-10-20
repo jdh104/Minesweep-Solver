@@ -214,7 +214,7 @@ public class CellMatrix {
     private void revealBombsAroundCellAt(int x, int y) {
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-                if (i != 1 && j != 1 && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
+                if ((i != 1 || j != 1) && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
                     if (this.matrix.get(x-1+i).get(y-1+j).isUnknownCell()) {
                         this.matrix.get(x-1+i).set(y-1+j, new BombCell());
                     }
@@ -226,7 +226,7 @@ public class CellMatrix {
     private void revealSafeCellsAroundCellAt(int x, int y) {
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-                if (i != 1 && j != 1 && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
+                if ((i != 1 || j != 1) && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
                     if (this.matrix.get(x-1+i).get(y-1+j).isUnknownCell()) {
                         this.matrix.get(x-1+i).get(y-1+j).setSafetyFlag(true);
                     }
