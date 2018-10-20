@@ -6,7 +6,7 @@ public class BombCell extends Cell {
     public static final long serialVersionUID = 1005L;
 
     public BombCell() {
-        super();
+        this.setHorizontalAlignment(CENTER);
         this.setFocusable(false);
         this.setValue(null);
         this.setText("X");
