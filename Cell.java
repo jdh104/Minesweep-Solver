@@ -8,15 +8,16 @@ import javax.swing.JTextField;
 public class Cell extends JTextField {
     
     public static final long serialVersionUID = 1004L;
-    private boolean safe;
+    private boolean resolved, safe;
     private Short value;
     
     public Cell() {
         super();
-        this.setBackground(Color.LIGHT_GRAY);
-        this.value = null;
+        this.resolved = false;
         this.safe = false;
-        this.setHorizontalAlignment(HORIZONTAL);
+        this.value = null;
+        this.setBackground(Color.LIGHT_GRAY);
+        this.setHorizontalAlignment(CENTER);
         this.setText("?");
 
         this.addFocusListener(new FocusListener() {
