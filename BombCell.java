@@ -1,7 +1,14 @@
+
+import java.awt.Color;
+
 public class BombCell extends Cell {
+
+    public static final long serialVersionUID = 1006L;
+
     public BombCell() {
         super();
         this.setValue(null);
+        this.setBackground(Color.RED);
     }
 
     @Override public Short getValue() throws UnknownAnswerException {

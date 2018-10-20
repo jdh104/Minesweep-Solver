@@ -12,6 +12,7 @@ public class Cell extends JTextField {
     
     public Cell() {
         super(1);
+        super.setBackground(Color.LIGHT_GRAY);
         this.value = null;
         this.safe = false;
         this.setHorizontalAlignment(HORIZONTAL);
@@ -29,6 +30,7 @@ public class Cell extends JTextField {
                     setText("?");
                     setValue(null);
                 }
+                CellMatrix.getInstance().autoValidate();
             }
         });
     }
@@ -45,6 +47,11 @@ public class Cell extends JTextField {
 
     public void setSafetyFlag(boolean newFlag) {
         this.safe = newFlag;
+        if (this.safe) {
+            super.setBackground(Color.GREEN);
+        } else {
+            super.setBackground(Color.LIGHT_GRAY);
+        }
     }
 
     public Cell setValue(Short newValue) {
