@@ -119,15 +119,16 @@ public class SolverFrame extends JFrame {
     public void refreshCellMatrix() {
         int cml = CellMatrix.getInstance().getLength();
         int cmw = CellMatrix.getInstance().getWidth();
-        cellMatrixPanel.setLayout(new GridLayout(cml, cmw));
-
+        cellMatrixPanel.removeAll();
+        
         for (int i=0; i<cml; i++) {
             for (int j=0; j<cmw; j++) {
                 cellMatrixPanel.add(CellMatrix.getInstance().getCell(i,j));
             }
         }
 
-        cellMatrixPanel.validate();
+        cellMatrixPanel.invalidate();
+        cellMatrixPanel.repaint();
         this.validate();
         this.repaint();
     }

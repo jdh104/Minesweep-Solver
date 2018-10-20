@@ -51,6 +51,11 @@ public class Cell extends JTextField {
         return this.safe;
     }
 
+    /**
+     * This flag should be set whenever the cell might have
+     * new information that could help solve the puzzle.
+     * @param newFlag true or false
+     */
     public void setResolvedFlag(boolean newFlag) {
         this.resolved = newFlag;
     }
@@ -69,11 +74,11 @@ public class Cell extends JTextField {
             this.value = newValue;
             if (this.value == null) {
                 this.setText("?");
-                this.setResolvedFlag(false);
+                this.setResolvedFlag(true);
                 this.setSafetyFlag(false);
             } else {
                 this.setText(newValue.toString());
-                this.setResolvedFlag(true);
+                this.setResolvedFlag(false);
                 this.setSafetyFlag(true);
             } return this;
         } else {

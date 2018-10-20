@@ -7,6 +7,7 @@ public class BombCell extends Cell {
 
     public BombCell() {
         super();
+        this.setFocusable(false);
         this.setValue(null);
         this.setText("X");
         this.setBackground(Color.RED);

@@ -225,7 +225,7 @@ public class CellMatrix {
                     }
                 }
             }
-        }
+        } SolverFrame.getInstance().refreshCellMatrix();
     }
 
     private void revealSafeCellsAroundCellAt(int x, int y) {
@@ -237,7 +237,7 @@ public class CellMatrix {
                     }
                 }
             }
-        }
+        } SolverFrame.getInstance().refreshCellMatrix();
     }
 
     public CellMatrix setDimensions(int newLength, int newWidth) {
