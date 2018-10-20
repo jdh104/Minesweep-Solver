@@ -27,8 +27,6 @@ public class Cell extends JTextField {
             @Override public void focusLost(FocusEvent e) {
                 try {
                     setValue(Short.parseShort(getText()));
-                    System.out.println(Short.parseShort(getText()));
-                    System.out.println(getValue());
                 } catch (Exception ex) {
                     setText("?");
                     setValue(null);
