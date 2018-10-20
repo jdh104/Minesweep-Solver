@@ -3,7 +3,7 @@ import java.awt.Color;
 
 public class BombCell extends Cell {
 
-    public static final long serialVersionUID = 1006L;
+    public static final long serialVersionUID = 1005L;
 
     public BombCell() {
         super();
