@@ -25,6 +25,10 @@ public class MainClass {
         return VERSION;
     }
 
+    public static void outputToFrame(String o) {
+        getRootFrame().output(o);
+    }
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
