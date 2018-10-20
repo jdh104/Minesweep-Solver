@@ -43,8 +43,16 @@ public class Cell extends JTextField {
         } return this.value;
     }
 
+    public boolean isResolved() {
+        return this.resolved;
+    }
+
     public boolean isSafe() {
         return this.safe;
+    }
+
+    public void setResolvedFlag(boolean newFlag) {
+        this.resolved = newFlag;
     }
 
     public void setSafetyFlag(boolean newFlag) {
@@ -61,9 +69,11 @@ public class Cell extends JTextField {
             this.value = newValue;
             if (this.value == null) {
                 this.setText("?");
+                this.setResolvedFlag(false);
                 this.setSafetyFlag(false);
             } else {
                 this.setText(newValue.toString());
+                this.setResolvedFlag(true);
                 this.setSafetyFlag(true);
             } return this;
         } else {
