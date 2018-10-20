@@ -27,11 +27,11 @@ public class MainClass {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {
-            System.err.println("Failed to get native Look-and-Feel");
+            System.err.println("Failed to apply Nimbus Look-and-Feel");
         }
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 backend = new Backend();
