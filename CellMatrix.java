@@ -73,7 +73,13 @@ public class CellMatrix {
 
     public void autoValidateCellAt(int x, int y) throws ImpossibleBoardException {
         Cell subj = this.matrix.get(x).get(y);
-        Short v = subj.getValue();
+        Short v;
+        try {
+            v = subj.getValue();
+        } catch (UnknownAnswerException uae) {
+            return;
+        }
+
         if (v == null) {
             return;
         } else {
@@ -103,8 +109,11 @@ public class CellMatrix {
         short count = 0;
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-                if (this.hasBombCellAt(x-1+i, y-1+j))
-                    count++;
+                try {
+                    if (this.hasBombCellAt(x-1+i, y-1+j)) count++;
+                } catch (ArrayIndexOutOfBoundsException aioobe) {
+                    continue;
+                }
             }
         } return count;
     }
@@ -113,8 +122,11 @@ public class CellMatrix {
         short count = 0;
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-                if (this.hasEmptyCellAt(x-1+i, y-1+j))
-                    count++;
+                try {
+                    if (this.hasEmptyCellAt(x-1+i, y-1+j)) count++;
+                } catch (ArrayIndexOutOfBoundsException aioobe) {
+                    continue;
+                }
             }
         } return count;
     }
@@ -123,8 +135,11 @@ public class CellMatrix {
         short count = 0;
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-                if (this.hasUnknownCellAt(x-1+i, y-1+j))
-                    count++;
+                try {
+                    if (this.hasUnknownCellAt(x-1+i, y-1+j)) count++;
+                } catch (ArrayIndexOutOfBoundsException aioobe) {
+                    continue;
+                }
             }
         } return count;
     }
@@ -190,7 +205,7 @@ public class CellMatrix {
     private void revealBombsAroundCellAt(int x, int y) {
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-                if (i != 1 && j != 1) {
+                if (i != 1 && j != 1 && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
                     if (this.matrix.get(x-1+i).get(y-1+j).isUnknownCell()) {
                         this.matrix.get(x-1+i).set(y-1+j, new BombCell());
                     }
@@ -202,7 +217,7 @@ public class CellMatrix {
     private void revealSafeCellsAroundCellAt(int x, int y) {
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-                if (i != 1 && j != 1) {
+                if (i != 1 && j != 1 && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
                     if (this.matrix.get(x-1+i).get(y-1+j).isUnknownCell()) {
                         this.matrix.get(x-1+i).get(y-1+j).setSafetyFlag(true);
                     }

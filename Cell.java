@@ -27,6 +27,8 @@ public class Cell extends JTextField {
             @Override public void focusLost(FocusEvent e) {
                 try {
                     setValue(Short.parseShort(getText()));
+                    System.out.println(Short.parseShort(getText()));
+                    System.out.println(getValue());
                 } catch (Exception ex) {
                     setText("?");
                     setValue(null);
@@ -58,9 +60,9 @@ public class Cell extends JTextField {
     public Cell setValue(Short newValue) {
         this.value = newValue;
         if (this.value == null) {
-            this.safe = false;
+            this.setSafetyFlag(false);
         } else {
-            this.safe = true;
+            this.setSafetyFlag(true);
         } return this;
     }
 
