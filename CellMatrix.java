@@ -88,6 +88,7 @@ public class CellMatrix {
         } else {
             short b = this.countBombCellsSurroundingCellAt(x, y);
             short u = this.countUnknownCellsSurroundingCellAt(x, y);
+            //short s = this.countConfirmedCellsSurroundingCellAt(x, y);
 
             if (v > b + u) {
                 throw new ImpossibleBoardException(subj);
@@ -212,11 +213,11 @@ public class CellMatrix {
     }
 
     private void revealBombsAroundCellAt(int x, int y) {
-        for (int i=0; i<3; i++) {
-            for (int j=0; j<3; j++) {
-                if ((i != 1 || j != 1) && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
-                    if (this.matrix.get(x-1+i).get(y-1+j).isUnknownCell()) {
-                        this.matrix.get(x-1+i).set(y-1+j, new BombCell());
+        for (int i=-1; i<2; i++) {
+            for (int j=-1; j<2; j++) {
+                if ((i != 0 || j != 0) && x+i >= 0 && x+i < this.width && y+j >= 0 && y+j < this.length) {
+                    if (this.matrix.get(x+i).get(y+j).isUnknownCell()) {
+                        this.matrix.get(x+i).set(y+j, new BombCell());
                     }
                 }
             }
@@ -224,11 +225,11 @@ public class CellMatrix {
     }
 
     private void revealSafeCellsAroundCellAt(int x, int y) {
-        for (int i=0; i<3; i++) {
-            for (int j=0; j<3; j++) {
-                if ((i != 1 || j != 1) && x-1+i >= 0 && x-1+i < this.width && y-1+j >= 0 && y-1+j < this.length) {
-                    if (this.matrix.get(x-1+i).get(y-1+j).isUnknownCell()) {
-                        this.matrix.get(x-1+i).get(y-1+j).setSafetyFlag(true);
+        for (int i=-1; i<2; i++) {
+            for (int j=-1; j<2; j++) {
+                if ((i != 0 || j != 0) && x+i >= 0 && x+i < this.width && y+j >= 0 && y+j < this.length) {
+                    if (this.matrix.get(x+i).get(y+j).isUnknownCell()) {
+                        this.matrix.get(x+i).get(y+j).setSafetyFlag(true);
                     }
                 }
             }
