@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class CellMatrix {
@@ -6,6 +7,7 @@ public class CellMatrix {
     private static CellMatrix instance;
     private ArrayList<ArrayList<Cell>> matrix;
     private int length, width;
+    private static Color defaultBackgroundColor;
 
     public static CellMatrix getInstance() {
         return CellMatrix.instance;
@@ -103,7 +105,9 @@ public class CellMatrix {
             tmp.add(new ArrayList<>());
             for (int j=0; j<w; j++)
                 tmp.get(i).add(new Cell());
-        } return tmp;
+        }
+        defaultBackgroundColor = tmp.get(0).get(0).getBackground();
+        return tmp;
     }
 
     public short countBombCellsSurroundingCellAt(int x, int y) {
@@ -112,7 +116,7 @@ public class CellMatrix {
             for (int j=0; j<3; j++) {
                 try {
                     if (this.hasBombCellAt(x-1+i, y-1+j)) count++;
-                } catch (ArrayIndexOutOfBoundsException aioobe) {
+                } catch (IndexOutOfBoundsException ioobe) {
                     continue;
                 }
             }
@@ -125,7 +129,7 @@ public class CellMatrix {
             for (int j=0; j<3; j++) {
                 try {
                     if (this.hasEmptyCellAt(x-1+i, y-1+j)) count++;
-                } catch (ArrayIndexOutOfBoundsException aioobe) {
+                } catch (IndexOutOfBoundsException ioobe) {
                     continue;
                 }
             }
@@ -138,7 +142,7 @@ public class CellMatrix {
             for (int j=0; j<3; j++) {
                 try {
                     if (this.hasUnknownCellAt(x-1+i, y-1+j)) count++;
-                } catch (ArrayIndexOutOfBoundsException aioobe) {
+                } catch (IndexOutOfBoundsException ioobe) {
                     continue;
                 }
             }
@@ -147,6 +151,10 @@ public class CellMatrix {
 
     public Cell getCell(int x, int y) throws IndexOutOfBoundsException {
         return this.matrix.get(x).get(y);
+    }
+
+    public static Color getDefaultBackgroundColor() {
+        return defaultBackgroundColor;
     }
 
     public int getLength() {

@@ -59,8 +59,10 @@ public class Cell extends JTextField {
         if (newValue == null || (newValue >= 0 && newValue <= 9)) {
             this.value = newValue;
             if (this.value == null) {
+                this.setText("?");
                 this.setSafetyFlag(false);
             } else {
+                this.setText(newValue.toString());
                 this.setSafetyFlag(true);
             } return this;
         } else {
