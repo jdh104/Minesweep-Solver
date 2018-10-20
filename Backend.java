@@ -1,6 +1,4 @@
 
-import javax.swing.SwingUtilities;
-
 public class Backend{
 
     private SolverFrame rootFrame;
