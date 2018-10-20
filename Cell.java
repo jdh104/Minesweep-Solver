@@ -12,8 +12,8 @@ public class Cell extends JTextField {
     private Short value;
     
     public Cell() {
-        super(1);
-        super.setBackground(Color.LIGHT_GRAY);
+        super();
+        this.setBackground(Color.RED);
         this.value = null;
         this.safe = false;
         this.setHorizontalAlignment(HORIZONTAL);
@@ -31,7 +31,7 @@ public class Cell extends JTextField {
                     setText("?");
                     setValue(null);
                 }
-                CellMatrix.getInstance().autoValidate();
+                CellMatrix.getInstance().autoValidateAndResolve();
             }
         });
     }
@@ -55,13 +55,17 @@ public class Cell extends JTextField {
         }
     }
 
-    public Cell setValue(Short newValue) {
-        this.value = newValue;
-        if (this.value == null) {
-            this.setSafetyFlag(false);
+    public Cell setValue(Short newValue) throws ImpossibleBoardException {
+        if (newValue == null || (newValue >= 0 && newValue <= 9)) {
+            this.value = newValue;
+            if (this.value == null) {
+                this.setSafetyFlag(false);
+            } else {
+                this.setSafetyFlag(true);
+            } return this;
         } else {
-            this.setSafetyFlag(true);
-        } return this;
+            throw new ImpossibleBoardException(this);
+        }
     }
 
     public boolean isBombCell() throws UnknownAnswerException {

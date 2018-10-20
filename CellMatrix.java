@@ -53,19 +53,20 @@ public class CellMatrix {
     public CellMatrix autoResolve(ImpossibleBoardException ibe) {
         try {
             ibe.getConflictCell().setValue(null);
-            return this.autoValidate();
+            return this.autoValidateAndResolve();
         } catch (ImpossibleBoardException ibe2) {
             return this.autoResolve(ibe2);
         }
     }
 
-    public CellMatrix autoValidate() throws ImpossibleBoardException {
+    public CellMatrix autoValidateAndResolve() throws ImpossibleBoardException {
         for (int i=0; i<this.length; i++) {
             for (int j=0; j<this.width; j++) {
                 try {
                     this.autoValidateCellAt(i, j);
                 } catch (ImpossibleBoardException ibe) {
-                    throw ibe;
+                    autoResolve(ibe);
+                    return this;
                 }
             }
         } return this;
