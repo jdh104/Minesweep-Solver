@@ -13,7 +13,7 @@ public class Cell extends JTextField {
     
     public Cell() {
         super();
-        this.setBackground(Color.RED);
+        this.setBackground(Color.LIGHT_GRAY);
         this.value = null;
         this.safe = false;
         this.setHorizontalAlignment(HORIZONTAL);
