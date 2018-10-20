@@ -21,15 +21,15 @@ public class Cell extends JTextField {
 
         this.addFocusListener(new FocusListener() {
             @Override public void focusGained(FocusEvent e) {
-                selectAll();
+                Cell.this.selectAll();
             }
 
             @Override public void focusLost(FocusEvent e) {
                 try {
-                    setValue(Short.parseShort(getText()));
+                    Cell.this.setValue(Short.parseShort(getText()));
                 } catch (Exception ex) {
-                    setText("?");
-                    setValue(null);
+                    Cell.this.setText("?");
+                    Cell.this.setValue(null);
                 }
                 CellMatrix.getInstance().autoValidateAndResolve();
             }
@@ -81,6 +81,6 @@ public class Cell extends JTextField {
     }
 
     public boolean isUnknownCell() {
-        return (value == null);
+        return (this.value == null);
     }
 }
