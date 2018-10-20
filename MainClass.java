@@ -1,0 +1,43 @@
+
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
+public class MainClass {
+    private static final String AUTHOR = "Jonah Haney";
+    private static final String VERSION = "2018.10.9";
+    public static final int DEFAULT_LENGTH = 7;
+    public static final int DEFAULT_WIDTH = 7;
+    private static Backend backend;
+    
+    public static String getAuthor() {
+        return AUTHOR;
+    }
+
+    public static Backend getBackend() {
+        return backend;
+    }
+
+    public static SolverFrame getRootFrame() {
+        return backend.getRootFrame();
+    }
+
+    public static String getVersion() {
+        return VERSION;
+    }
+
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.err.println("Failed to get native Look-and-Feel");
+        }
+
+        backend = new Backend();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                backend.getRootFrame().setVisible(true);
+            }
+        });
+    }
+}
