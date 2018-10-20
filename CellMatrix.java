@@ -54,7 +54,7 @@ public class CellMatrix {
 
     public CellMatrix autoResolve(ImpossibleBoardException ibe) {
         try {
-            ibe.getConflictCell().setValue(null);
+            ibe.getConflictCell().setValue(null).setResolvedFlag(true);
             return this.autoValidateAndResolve();
         } catch (ImpossibleBoardException ibe2) {
             return this.autoResolve(ibe2);
@@ -65,7 +65,10 @@ public class CellMatrix {
         for (int i=0; i<this.length; i++) {
             for (int j=0; j<this.width; j++) {
                 try {
-                    this.autoValidateCellAt(i, j);
+                    if (!matrix.get(i).get(j).isResolved()) {
+                        this.autoValidateCellAt(i, j);
+                        matrix.get(i).get(j).setResolvedFlag(true);
+                    }
                 } catch (ImpossibleBoardException ibe) {
                     autoResolve(ibe);
                     return this;
