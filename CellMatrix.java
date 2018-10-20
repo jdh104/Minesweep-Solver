@@ -66,7 +66,7 @@ public class CellMatrix {
             for (int j=0; j<this.width; j++) {
                 try {
                     if (!matrix.get(i).get(j).isResolved()) {
-                        MainClass.outputToFrame("Validating Cell at: x=" + i + ", y=" + j);
+                        MainClass.outputToFrame("Validating Cell at: x=" + j + ", y=" + i);
                         this.autoValidateCellAt(i, j);
                         matrix.get(i).get(j).setResolvedFlag(true);
                     }
