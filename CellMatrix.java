@@ -87,20 +87,16 @@ public class CellMatrix {
             return;
         }
 
-        if (v == null) {
-            return;
-        } else {
-            short b = this.countBombCellsSurroundingCellAt(x, y);
-            short u = this.countUnknownCellsSurroundingCellAt(x, y);
-            //short s = this.countConfirmedCellsSurroundingCellAt(x, y);
+        short b = this.countBombCellsSurroundingCellAt(x, y);
+        short u = this.countUnknownCellsSurroundingCellAt(x, y);
+        //short s = this.countConfirmedCellsSurroundingCellAt(x, y);
 
-            if (v > b + u || v < b) {
-                throw new ImpossibleBoardException(subj);
-            } else if (v == b + u) {
-                this.revealBombsAroundCellAt(x, y);
-            } else if (b == v && u > 0) {
-                this.revealSafeCellsAroundCellAt(x, y);
-            }
+        if (v > b + u || v < b) {
+            throw new ImpossibleBoardException(subj);
+        } else if (v == b + u) {
+            this.revealBombsAroundCellAt(x, y);
+        } else if (b == v && u > 0) {
+            this.revealSafeCellsAroundCellAt(x, y);
         }
     }
 
