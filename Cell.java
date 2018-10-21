@@ -31,6 +31,8 @@ public class Cell extends JTextField {
                 } catch (Exception ex) {
                     Cell.this.setText("?");
                     Cell.this.setValue(null);
+                    CellMatrix.getInstance().resetAllBombs();
+                    CellMatrix.getInstance().autoValidateAndResolve();
                 }
                 CellMatrix.getInstance().autoValidateAndResolve();
             }
