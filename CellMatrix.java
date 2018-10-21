@@ -68,7 +68,7 @@ public class CellMatrix {
                     if (true/*!matrix.get(i).get(j).isResolved()*/) {
                         MainClass.outputToFrame("Validating Cell at: x=" + j + ", y=" + i);
                         this.autoValidateCellAt(i, j);
-                        matrix.get(i).get(j).setResolvedFlag(true);
+                        //matrix.get(i).get(j).setResolvedFlag(true);
                     }
                 } catch (ImpossibleBoardException ibe) {
                     autoResolve(ibe);
@@ -188,6 +188,16 @@ public class CellMatrix {
 
     public Boolean hasUnknownCellAt(int x, int y) {
         return this.matrix.get(x).get(y).isUnknownCell();
+    }
+
+    public void resetAllBombs() {
+        for (int i=0; i<this.length; i++) {
+            for (int j=0; j<this.width; j++) {
+                if (this.getCell(i,j) instanceof BombCell) {
+                    matrix.get(i).set(j, new Cell());
+                }
+            }
+        }
     }
 
     private CellMatrix resizeMatrixTo(int l, int w) {

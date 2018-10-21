@@ -1,6 +1,7 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,7 +16,7 @@ public class SolverFrame extends JFrame {
     private JPanel contentPane;
     private JLabel messageLabel;
     private JPanel topPanel, middlePanel, leftExtendPanel, cellMatrixPanel, rightExtendPanel, bottomPanel, messagePanel, controlPanel;
-    private JButton topExtendButton, leftExtendButton, rightExtendButton, bottomExtendButton;
+    private JButton topExtendButton, leftExtendButton, rightExtendButton, bottomExtendButton, recalculateBombsButton;
 
     public static SolverFrame getInstance() {
         return instance;
@@ -42,6 +43,7 @@ public class SolverFrame extends JFrame {
         leftExtendButton = new JButton("+");
         rightExtendButton = new JButton("+");
         bottomExtendButton = new JButton("+");
+        recalculateBombsButton = new JButton("Re-calculate Bombs");
 
         topExtendButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
@@ -65,6 +67,13 @@ public class SolverFrame extends JFrame {
             public void actionPerformed(ActionEvent a) {
                 CellMatrix.getInstance().addRowToBottom();
                 refreshCellMatrix();
+            }
+        });
+        recalculateBombsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent a) {
+                CellMatrix.getInstance().resetAllBombs();
+                CellMatrix.getInstance().autoValidateAndResolve();
+                //refreshCellMatrix();
             }
         });
 
@@ -100,6 +109,9 @@ public class SolverFrame extends JFrame {
 
         messagePanel.setLayout(new GridLayout(1,1));
         messagePanel.add(messageLabel);
+
+        controlPanel.setLayout(new FlowLayout());
+        controlPanel.add(recalculateBombsButton);
 
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         contentPane.add(topPanel);
