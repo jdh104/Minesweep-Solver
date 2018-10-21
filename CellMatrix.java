@@ -87,6 +87,10 @@ public class CellMatrix {
 
     public boolean autoValidateCellAt(int x, int y) throws ImpossibleBoardException {
         Cell subj = this.matrix.get(x).get(y);
+        if (subj instanceof BombCell) {
+            return false;
+        }
+
         Short v;
         try {
             v = subj.getValue();
