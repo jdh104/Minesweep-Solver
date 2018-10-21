@@ -51,6 +51,20 @@ public class Cell extends JTextField {
         return this.safe;
     }
 
+    public boolean isBombCell() throws UnknownAnswerException {
+        if (value == null) {
+            throw new UnknownAnswerException();
+        } return false;
+    }
+
+    public boolean isEmptyCell() throws UnknownAnswerException {
+        return !this.isBombCell();
+    }
+
+    public boolean isUnknownCell() {
+        return (this.value == null && !this.safe);
+    }
+
     /**
      * This flag should be set whenever the cell might have
      * new information that could help solve the puzzle.
@@ -88,19 +102,5 @@ public class Cell extends JTextField {
         } else {
             throw new ImpossibleBoardException(this);
         }
-    }
-
-    public boolean isBombCell() throws UnknownAnswerException {
-        if (value == null) {
-            throw new UnknownAnswerException();
-        } return false;
-    }
-
-    public boolean isEmptyCell() throws UnknownAnswerException {
-        return !this.isBombCell();
-    }
-
-    public boolean isUnknownCell() {
-        return (this.value == null);
     }
 }
