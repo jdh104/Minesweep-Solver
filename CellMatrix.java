@@ -209,7 +209,7 @@ public class CellMatrix {
             } catch (IndexOutOfBoundsException ioobe) {
                 // extend matrix if new length > old length
                 tmp.add(new ArrayList<>());
-                for (int j=0; j<w; j++) {
+                for (int j=0; j<this.width; j++) {
                     tmp.get(i).add(new Cell());
                 } continue;
             }

@@ -132,6 +132,7 @@ public class SolverFrame extends JFrame {
         int cml = CellMatrix.getInstance().getLength();
         int cmw = CellMatrix.getInstance().getWidth();
         cellMatrixPanel.removeAll();
+        cellMatrixPanel.setLayout(new GridLayout(cml, cmw));
         
         for (int i=0; i<cml; i++) {
             for (int j=0; j<cmw; j++) {
