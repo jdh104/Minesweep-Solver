@@ -61,11 +61,11 @@ public class CellMatrix {
         }
     }
 
-    public CellMatrix autoValidateAndResolve() throws ImpossibleBoardException {
+    public CellMatrix autoValidateAndResolve() {
         for (int i=0; i<this.length; i++) {
             for (int j=0; j<this.width; j++) {
                 try {
-                    if (!matrix.get(i).get(j).isResolved()) {
+                    if (true/*!matrix.get(i).get(j).isResolved()*/) {
                         MainClass.outputToFrame("Validating Cell at: x=" + j + ", y=" + i);
                         this.autoValidateCellAt(i, j);
                         matrix.get(i).get(j).setResolvedFlag(true);
@@ -94,7 +94,7 @@ public class CellMatrix {
             short u = this.countUnknownCellsSurroundingCellAt(x, y);
             //short s = this.countConfirmedCellsSurroundingCellAt(x, y);
 
-            if (v > b + u) {
+            if (v > b + u || v < b) {
                 throw new ImpossibleBoardException(subj);
             } else if (v == b + u) {
                 this.revealBombsAroundCellAt(x, y);
