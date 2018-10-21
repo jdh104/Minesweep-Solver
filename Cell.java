@@ -63,7 +63,11 @@ public class Cell extends JTextField {
     public void setSafetyFlag(boolean newFlag) {
         this.safe = newFlag;
         if (this.safe) {
-            super.setBackground(Color.GREEN);
+            if (this.value == null) {
+                super.setBackground(Color.BLUE);
+            } else {
+                super.setBackground(Color.GREEN);
+            }
         } else {
             super.setBackground(Color.LIGHT_GRAY);
         }
