@@ -78,7 +78,7 @@ public class Cell extends JTextField {
         this.safe = newFlag;
         if (this.safe) {
             if (this.value == null) {
-                super.setBackground(Color.BLUE);
+                super.setBackground(Color.CYAN);
             } else {
                 super.setBackground(Color.GREEN);
             }
