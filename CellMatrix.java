@@ -62,12 +62,15 @@ public class CellMatrix {
     }
 
     public CellMatrix autoValidateAndResolve() {
+        boolean somethingChanged = false;
+
         for (int i=0; i<this.length; i++) {
             for (int j=0; j<this.width; j++) {
                 try {
                     if (true/*!matrix.get(i).get(j).isResolved()*/) {
                         MainClass.outputToFrame("Validating Cell at: x=" + j + ", y=" + i);
-                        this.autoValidateCellAt(i, j);
+                        if (this.autoValidateCellAt(i, j))
+                            somethingChanged = true;
                         //matrix.get(i).get(j).setResolvedFlag(true);
                     }
                 } catch (ImpossibleBoardException ibe) {
@@ -75,16 +78,20 @@ public class CellMatrix {
                     return this;
                 }
             }
+        }
+
+        if (somethingChanged) {
+            return this.autoValidateAndResolve();
         } return this;
     }
 
-    public void autoValidateCellAt(int x, int y) throws ImpossibleBoardException {
+    public boolean autoValidateCellAt(int x, int y) throws ImpossibleBoardException {
         Cell subj = this.matrix.get(x).get(y);
         Short v;
         try {
             v = subj.getValue();
         } catch (UnknownAnswerException uae) {
-            return;
+            return false;
         }
 
         short b = this.countBombCellsSurroundingCellAt(x, y);
@@ -95,9 +102,11 @@ public class CellMatrix {
             throw new ImpossibleBoardException(subj);
         } else if (v == b + u) {
             this.revealBombsAroundCellAt(x, y);
+            return true;
         } else if (b == v && u > 0) {
             this.revealSafeCellsAroundCellAt(x, y);
-        }
+            return true;
+        } return false;
     }
 
     private static ArrayList<ArrayList<Cell>> buildEmptyMatrix(int l, int w) {
