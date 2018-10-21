@@ -75,7 +75,7 @@ public class CellMatrix {
                     }
                 } catch (ImpossibleBoardException ibe) {
                     autoResolve(ibe);
-                    return this;
+                    return this.autoValidateAndResolve();
                 }
             }
         }
@@ -91,7 +91,10 @@ public class CellMatrix {
         try {
             v = subj.getValue();
         } catch (UnknownAnswerException uae) {
-            return false;
+            if (this.countUnknownCellsSurroundingCellAt(x, y) == 0) {
+                subj.setValue(this.countBombCellsSurroundingCellAt(x,y));
+                return true;
+            } return false;
         }
 
         short b = this.countBombCellsSurroundingCellAt(x, y);
@@ -100,12 +103,14 @@ public class CellMatrix {
 
         if (v > b + u || v < b) {
             throw new ImpossibleBoardException(subj);
-        } else if (v == b + u) {
-            this.revealBombsAroundCellAt(x, y);
-            return true;
-        } else if (b == v && u > 0) {
-            this.revealSafeCellsAroundCellAt(x, y);
-            return true;
+        } else if (u > 0) {
+            if (v == b + u) {
+                this.revealBombsAroundCellAt(x, y);
+                return true;
+            } else if (b == v) {
+                this.revealSafeCellsAroundCellAt(x, y);
+                return true;
+            }
         } return false;
     }
 
