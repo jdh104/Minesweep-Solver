@@ -42,18 +42,5 @@ public class MainClass {
                 backend.getRootFrame().setVisible(true);
             }
         });
-
-        while (true) {
-            try {
-                Thread.sleep(3000);
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    public void run() {
-                        CellMatrix.getInstance().autoValidateAndResolve();
-                    }
-                });
-            } catch (Exception e) {
-                continue;
-            }
-        }
     }
 }
